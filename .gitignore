@@ -12,3 +12,4 @@ vc140.pdb
 Snake.pdb
 .vscode/settings.json
 .vscode/tasks.json
+.ignore/*
