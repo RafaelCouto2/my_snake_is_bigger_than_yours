@@ -14,13 +14,10 @@ class Snake
 {
     private:
         char snake_body;
-        bool collision;
         int direction;
         int snake_lengh;
         int snakemap[9][20];
         int head_line, head_column, tail_line, tail_column;
-        
-
     public:
         char getSnakeBody();
         bool isColliding();
@@ -47,7 +44,6 @@ class Scene
     public:
         void ini_scene();
         char getScenario(int line, int column);
-
 };
 
 class Fruit

@@ -55,32 +55,20 @@ void Snake::movSnake()
 void Snake::growUp()
 {
     this->snake_lengh++;
-    switch(this->direction)
+    
+    for (size_t i = 0; i < 1; i++)
     {
-    case 0:
-    for (size_t i = 0; i < 9; i++)
-    {
-        for (size_t j = 0; j < 20; j++)
+        int sig = std::pow(-1, i);
+        if(this->snakemap[this->tail_line + sig][this->tail_column] == 0)
         {
-            if(this->snakemap[i][j] == this->snake_lengh - 1)
-            {
-                this->snakemap[i + 1][j] = this->snake_lengh;
-            }
+            this->snakemap[this->tail_line + sig][this->tail_column] = this->snake_lengh;
+            return;
         }
-    }
-    break;
-    case 1:
-    for (size_t i = 0; i < 9; i++)
-    {
-        for (size_t j = 0; j < 20; j++)
+        if(this->snakemap[this->tail_line][this->tail_column + sig] == 0)
         {
-            if(this->snakemap[i][j] == this->snake_lengh - 1)
-            {
-                this->snakemap[i - 1][j] = this->snake_lengh;
-            }
+            this->snakemap[this->tail_line][this->tail_column + sig] = this->snake_lengh;
+            return;
         }
-    }
-    break;
     }
 }
 
@@ -116,10 +104,14 @@ void Snake::setHeadPos(int line, int column)
 
 void Snake::ageSnake()
 {
+    int bigger = 0;
     for (size_t i = 0; i < 9; i++)
     {
         for (size_t j = 0; j < 20; j++)
         {
+            if(this->snakemap[i][j] == this->snake_lengh)
+            this->tail_line = i; this->tail_column = j;
+            
             if(this->snakemap[i][j] > 0) 
             {
                 this->snakemap[i][j]++;
@@ -127,6 +119,7 @@ void Snake::ageSnake()
         }
     }
 }
+
 void Snake::trimTail()
 {
     for (size_t i = 0; i < 9; i++)
@@ -143,7 +136,6 @@ void Snake::trimTail()
 
 void Snake::controller()
 {
-
     char c = 0;
     if(_kbhit()) c = _getch();
     switch(c)

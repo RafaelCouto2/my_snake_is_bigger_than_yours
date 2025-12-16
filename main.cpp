@@ -7,7 +7,6 @@ int main(int argc, char const *argv[])
     while(1)
     {
         controller();
-        getMainGame()->getSnake()->movSnake();
         refresh();
         std::this_thread::sleep_for(std::chrono::milliseconds(250));
     }   

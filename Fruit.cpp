@@ -16,8 +16,8 @@ void Fruit::ini_fruitr()
 void Fruit::randomFruit()
 {
     std::mt19937 gen(this->rd());
-    std::uniform_int_distribution<> distribc(0, 20);
-    std::uniform_int_distribution<> distribl(0, 9);
+    std::uniform_int_distribution<> distribc(1, 19);
+    std::uniform_int_distribution<> distribl(1, 8);
     int line = distribl(gen);
     int column = distribc(gen);
     this->setFruitPos(line, column);

@@ -25,6 +25,7 @@ void refresh()
     #endif
     
     game->snakeFruitCo();
+    game->getSnake()->movSnake();
     spawnFruit();
     for (size_t i = 0; i < 9; i++)
     {
@@ -32,7 +33,7 @@ void refresh()
         {
             if(game->getFruitr()->getFruit(i, j) > 0)
             {
-                std::cout << '0';
+                std::cout << '+';
                 continue;
             }
             if(game->getSnake()->getSnakePos(i, j) > 0)
