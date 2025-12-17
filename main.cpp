@@ -2,13 +2,13 @@
 
 int main(int argc, char const *argv[])
 {
-
-    init();
-    while(running())
+    Game game;
+    game.init();
+    while(game.isRunning())
     {
-        controller();
-        update();
-        refresh();
+        game.controller();
+        game.update();
+        game.refresh();
         std::this_thread::sleep_for(std::chrono::milliseconds(250));
     }   
 

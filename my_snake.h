@@ -8,10 +8,9 @@
 #include <conio.h>
 #include <iostream>
 #include <random>
+#include <memory>
 
 typedef struct pos{int x, y;} pos;
-
-extern bool running_;
 
 class Snake
 {
@@ -20,22 +19,19 @@ class Snake
         int direction;
         int snake_lengh;
         int snakemap[9][20];
-        int head_line, head_column, tail_line, tail_column;
+        int head_line, head_column;
     public:
         char getSnakeBody();
-        bool isColliding();
         void ini_snake();
         void ageSnake();
         void trimTail();
         void growUp();
         void controller();
         void movSnake();
-        int getSnakePos(int line, int column);
+        int getSnakeAt(int line, int column);
         int getHeadLine();
         int getHeadColumn();
         int getDirection();
-        int getTailLine();
-        int getTailColumn();
         void setHeadPos(int line, int column);
 };
 
@@ -71,31 +67,24 @@ class Fruit
 class Game
 {
     private:
-        Snake * snake;
-        Scene * mainscene;
-        Fruit * fruitrand;
+        std::unique_ptr<Snake> snake;
+        std::unique_ptr<Scene> mainscene;
+        std::unique_ptr<Fruit> fruitrand;
+        static bool running_;
     public:
         Snake * getSnake();
         Scene * getScene();
         Fruit * getFruitr();
-        void setSnake(Snake *snake);
-        void setMainScene(Scene *scene);
-        void setFruitRandomizer(Fruit *fruitr);
         void snakeFruitCo();
         void outOfBounds();
-        Game(Snake *snake, Scene *scene, Fruit * fruitr);
+        void init();
+        void refresh();
+        void update();
+        void gotoxy(short x, short y);
+        void spawnFruit();
+        void endgame();
+        void controller();
+        void setRunning(bool);
+        bool isRunning();
+        Game(); 
 };
-
-
-void init();
-void refresh();
-void update();
-bool running();
-void outOfBounds();
-void gotoxy(short x, short y);
-void spawnFruit();
-void endgame();
-void controller();
-void solid_snake();
-void liquid_snale();
-Game * getMainGame();

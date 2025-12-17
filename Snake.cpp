@@ -14,7 +14,6 @@ void Snake::ini_snake()
             this->snakemap[i][j] = 0;
         }
     }
-    
     this->snake_body = '*';
     this->direction = 0;
     this->snake_lengh = 3;
@@ -23,11 +22,9 @@ void Snake::ini_snake()
     this->snakemap[6][7] = 3;
     this->head_line = 4;
     this->head_column = 7;
-    this->tail_line = 6;
-    this->tail_column = 7;
 }
 
-int Snake::getSnakePos(int line, int column)
+int Snake::getSnakeAt(int line, int column)
 {
     return this->snakemap[line][column];
 }
@@ -55,30 +52,6 @@ void Snake::movSnake()
 void Snake::growUp()
 {
     this->snake_lengh++;
-    
-    for (size_t i = 0; i < 1; i++)
-    {
-        int sig = std::pow(-1, i);
-        if(this->snakemap[this->tail_line + sig][this->tail_column] == 0)
-        {
-            this->snakemap[this->tail_line + sig][this->tail_column] = this->snake_lengh;
-            return;
-        }
-        if(this->snakemap[this->tail_line][this->tail_column + sig] == 0)
-        {
-            this->snakemap[this->tail_line][this->tail_column + sig] = this->snake_lengh;
-            return;
-        }
-    }
-}
-
-int Snake::getTailLine()
-{
-    return this->tail_line;
-}
-int Snake::getTailColumn()
-{
-    return this->tail_column;
 }
 
 int Snake::getHeadLine()
@@ -104,18 +77,11 @@ void Snake::setHeadPos(int line, int column)
 
 void Snake::ageSnake()
 {
-    int bigger = 0;
     for (size_t i = 0; i < 9; i++)
     {
         for (size_t j = 0; j < 20; j++)
         {
-            if(this->snakemap[i][j] == this->snake_lengh)
-            this->tail_line = i; this->tail_column = j;
-            
-            if(this->snakemap[i][j] > 0) 
-            {
-                this->snakemap[i][j]++;
-            }
+            this->snakemap[i][j] > 0? this->snakemap[i][j]++ : NULL;
         }
     }
 }
@@ -126,10 +92,7 @@ void Snake::trimTail()
     {
         for (size_t j = 0; j < 20; j++)
         {
-            if(this->snakemap[i][j] > this->snake_lengh) 
-            {
-                this->snakemap[i][j] = 0;
-            }
+            this->snakemap[i][j] > this->snake_lengh? this->snakemap[i][j] = 0 : NULL;
         }
     }
 }
