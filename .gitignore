@@ -10,6 +10,7 @@ Scene.obj
 Snake.obj
 vc140.pdb
 Snake.pdb
+Controller.obj
 .vscode/settings.json
 .vscode/tasks.json
 .ignore/
