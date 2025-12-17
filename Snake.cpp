@@ -14,14 +14,13 @@ void Snake::ini_snake()
             this->snakemap[i][j] = 0;
         }
     }
-    this->snake_body = '*';
-    this->direction = 0;
+    this->snake_body = 254;
+    this->head_line = 5;
+    this->head_column = 8;
     this->snake_lengh = 3;
-    this->snakemap[4][7] = 1;
-    this->snakemap[5][7] = 2;
-    this->snakemap[6][7] = 3;
-    this->head_line = 4;
-    this->head_column = 7;
+    this->snakemap[5][8] = 1;
+    this->snakemap[6][8] = 2;
+    this->snakemap[7][8] = 3;
 }
 
 int Snake::getSnakeAt(int line, int column)
@@ -29,12 +28,12 @@ int Snake::getSnakeAt(int line, int column)
     return this->snakemap[line][column];
 }
 
-void Snake::movSnake()
+bool Snake::move(int dir)
 {
     int new_line = this->head_line;
     int new_column = this->head_column;
 
-    switch (this->direction)
+    switch (dir)
     {
         case 0: new_line--; break;
         case 1: new_line++; break;
@@ -43,10 +42,13 @@ void Snake::movSnake()
         default: break;
     }
     
+    if(this->willCollide(new_line, new_column)) return false;
+
     this->ageSnake();
     this->setHeadPos(new_line, new_column);
     this->snakemap[this->head_line][this->head_column] = 1;
     this->trimTail();
+    return true;
 }
 
 void Snake::growUp()
@@ -62,11 +64,6 @@ int Snake::getHeadLine()
 int Snake::getHeadColumn()
 {
     return this->head_column;
-}
-
-int Snake::getDirection()
-{
-    return this->direction;
 }
 
 void Snake::setHeadPos(int line, int column)
@@ -97,17 +94,7 @@ void Snake::trimTail()
     }
 }
 
-void Snake::controller()
+bool Snake::willCollide(int nextline, int nextcolumn) const
 {
-    char c = 0;
-    if(_kbhit()) c = _getch();
-    switch(c)
-    {
-        case 72: this->direction = 0; break;
-        case 80: this->direction = 1; break;
-        case 75: this->direction = 2; break;
-        case 77: this->direction = 3; break;
-        default: break;
-    }
-    std::fflush(stdin);
+    return this->snakemap[nextline][nextcolumn] > 0;
 }

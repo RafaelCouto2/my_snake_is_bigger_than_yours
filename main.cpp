@@ -9,9 +9,9 @@ int main(int argc, char const *argv[])
         game.controller();
         game.update();
         game.refresh();
-        std::this_thread::sleep_for(std::chrono::milliseconds(250));
+        std::this_thread::sleep_for(std::chrono::milliseconds(150));
     }   
-
+    
     std::system("pause");
     return 0;
 }

@@ -2,7 +2,7 @@
 
 void Fruit::ini_fruitr()
 {
-    this->eaten = true;
+    this->eated = true;
     this->fruit = 0;
     for (size_t i = 0; i < 9; i++)
     {
@@ -16,8 +16,8 @@ void Fruit::ini_fruitr()
 void Fruit::randomFruit()
 {
     std::mt19937 gen(this->rd());
-    std::uniform_int_distribution<> distribc(1, 19);
     std::uniform_int_distribution<> distribl(1, 8);
+    std::uniform_int_distribution<> distribc(1, 19);
     int line = distribl(gen);
     int column = distribc(gen);
     this->setFruitPos(line, column);
@@ -34,14 +34,14 @@ void Fruit::setFruit(int line, int column, int val)
     this->fruitmap[line][column] = val;
 }
 
-bool Fruit::isEaten()
+bool Fruit::haveEaten()
 {
-    return this->eaten;
+    return this->eated;
 }
 
-void Fruit::setEaten(bool eated)
+void Fruit::setEated(bool eated)
 {
-    this->eaten = eated;
+    this->eated = eated;
 }
 
 pos Fruit::getFruitPos()
