@@ -4,12 +4,14 @@ int main(int argc, char const *argv[])
 {
 
     init();
-    while(1)
+    while(running())
     {
         controller();
+        update();
         refresh();
         std::this_thread::sleep_for(std::chrono::milliseconds(250));
     }   
 
+    std::system("pause");
     return 0;
 }

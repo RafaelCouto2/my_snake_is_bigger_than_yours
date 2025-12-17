@@ -4,11 +4,14 @@
 #endif
 
 #include <thread>
+#include <windows.h>
 #include <conio.h>
 #include <iostream>
 #include <random>
 
 typedef struct pos{int x, y;} pos;
+
+extern bool running_;
 
 class Snake
 {
@@ -79,12 +82,17 @@ class Game
         void setMainScene(Scene *scene);
         void setFruitRandomizer(Fruit *fruitr);
         void snakeFruitCo();
+        void outOfBounds();
         Game(Snake *snake, Scene *scene, Fruit * fruitr);
 };
 
 
 void init();
 void refresh();
+void update();
+bool running();
+void outOfBounds();
+void gotoxy(short x, short y);
 void spawnFruit();
 void endgame();
 void controller();
