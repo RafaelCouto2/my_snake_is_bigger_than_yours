@@ -92,6 +92,7 @@ void Game::snakeFruitCo()
         this->getSnake()->growUp();
         this->getFruitr()->setFruit(fruit_line, fruit_column, 0);
         this->getFruitr()->setEated(true);
+        this->playAudio();
     }
 }
 
@@ -144,4 +145,9 @@ Fruit * Game::getFruitr()
 Controller * Game::getInput() 
 {
     return this->input.get();
+}
+
+void Game::playAudio()
+{
+    std::cout << '\a';
 }

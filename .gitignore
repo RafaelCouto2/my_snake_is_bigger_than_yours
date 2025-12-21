@@ -14,3 +14,9 @@ Controller.obj
 .vscode/settings.json
 .vscode/tasks.json
 .ignore/
+.vs/
+x64/
+.vscode/
+*.vcxproj
+*.vcxproj.*
+*.sln

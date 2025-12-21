@@ -100,6 +100,7 @@ class Game
         void    spawnFruit();
         void    endgame();
         void    controller();
+        void    playAudio();
         void    setRunning(bool);
         bool    isRunning();
         Game();
